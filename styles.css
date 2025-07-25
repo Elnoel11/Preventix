@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("background.jpg"); /* make sure this file exists */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.6);
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+button {
+  background-color: #00bcd4;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0097a7;
+}
+
+/* Input form box */
+.form-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+input {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+.form-btn {
+  background-color: #4CAF50;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.form-btn:hover {
+  background-color: #388E3C;
+}
