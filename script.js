@@ -1,106 +1,115 @@
-let users = []; // Simulated database
-let currentUser = null;
-
 function showRegistrationForm() {
-  document.getElementById('loginContainer').classList.add('hidden');
-  document.getElementById('registrationContainer').classList.remove('hidden');
+  document.getElementById("loginContainer").classList.add("hidden");
+  document.getElementById("registrationContainer").classList.remove("hidden");
 }
 
 function registerUser() {
-  const fullName = document.getElementById('fullName').value;
-  const birthDate = document.getElementById('birthDate').value;
-  const gender = document.getElementById('gender').value;
-  const gradeLevel = document.getElementById('gradeLevel').value;
-  const section = document.getElementById('section').value;
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+  const fullName = document.getElementById("fullName").value;
+  const birthDate = document.getElementById("birthDate").value;
+  const gender = document.getElementById("gender").value;
+  const grade = document.getElementById("gradeLevel").value;
+  const section = document.getElementById("section").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-  if (!fullName || !birthDate || !gender || !gradeLevel || !section || !email || !password) {
-    alert('Please fill in all fields.');
+  if (!fullName || !birthDate || !gender || !grade || !section || !email || !password) {
+    alert("Please fill all fields.");
     return;
   }
 
-  users.push({ fullName, birthDate, gender, gradeLevel, section, email, password });
-  localStorage.setItem('users', JSON.stringify(users));
+  localStorage.setItem("fullName", fullName);
+  localStorage.setItem("birthDate", birthDate);
+  localStorage.setItem("gender", gender);
+  localStorage.setItem("gradeLevel", grade);
+  localStorage.setItem("section", section);
+  localStorage.setItem("email", email);
+  localStorage.setItem("password", password);
 
-  document.getElementById('registrationContainer').classList.add('hidden');
-  document.getElementById('loginContainer').classList.remove('hidden');
-  alert('Registration successful! Please log in.');
-}
-
-function loginUser() {
-  const name = document.getElementById('loginName').value;
-  const password = document.getElementById('loginPassword').value;
-  const savedUsers = JSON.parse(localStorage.getItem('users')) || [];
-
-  const foundUser = savedUsers.find(user => user.fullName === name && user.password === password);
-
-  if (!foundUser) {
-    alert('Invalid name or password.');
-    return;
-  }
-
-  currentUser = foundUser;
-  document.getElementById('loginContainer').classList.add('hidden');
-  document.getElementById('avatarContainer').classList.remove('hidden');
+  document.getElementById("registrationContainer").classList.add("hidden");
+  document.getElementById("avatarContainer").classList.remove("hidden");
 }
 
 function saveAvatar() {
-  const username = document.getElementById('username').value;
-  const avatarFile = document.getElementById('avatarUpload').files[0];
+  const username = document.getElementById("username").value;
+  const avatar = document.getElementById("avatarUpload").files[0];
 
-  if (!username || !avatarFile) {
-    alert('Please enter a username and select an avatar image.');
+  if (!username || !avatar) {
+    alert("Please enter a username and select an avatar image.");
     return;
   }
 
   const reader = new FileReader();
-  reader.onload = function (e) {
-    currentUser.username = username;
-    currentUser.avatar = e.target.result;
-    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+  reader.onloadend = function () {
+    localStorage.setItem("username", username);
+    localStorage.setItem("avatar", reader.result);
     showDashboard();
   };
-  reader.readAsDataURL(avatarFile);
+  reader.readAsDataURL(avatar);
+}
+
+function loginUser() {
+  const loginName = document.getElementById("loginName").value;
+  const loginPass = document.getElementById("loginPassword").value;
+
+  const storedName = localStorage.getItem("fullName");
+  const storedPass = localStorage.getItem("password");
+
+  if (loginName === storedName && loginPass === storedPass) {
+    showDashboard();
+  } else {
+    alert("Invalid credentials!");
+  }
 }
 
 function showDashboard() {
-  document.getElementById('avatarContainer').classList.add('hidden');
-  document.getElementById('dashboard').classList.remove('hidden');
-  document.getElementById('avatarImage').src = currentUser.avatar;
-  document.getElementById('userDisplayName').textContent = currentUser.username;
+  document.getElementById("loginContainer").classList.add("hidden");
+  document.getElementById("registrationContainer").classList.add("hidden");
+  document.getElementById("avatarContainer").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+
+  document.getElementById("userDisplayName").textContent = localStorage.getItem("username") || "User";
+  document.getElementById("avatarImage").src = localStorage.getItem("avatar");
 }
 
 function showSection(section) {
-  const main = document.getElementById('mainContent');
+  const content = document.getElementById("mainContent");
+
   if (section === 'story') {
-    main.innerHTML = `<h2>📘 Story Mode</h2><p>Story Mode content goes here.</p>`;
+    content.innerHTML = "<h2>📘 Story Mode</h2><p>Coming soon!</p>";
   } else if (section === 'adventure') {
-    main.innerHTML = `
-      <h2>⚔️ Adventure</h2>
-      <p>You need to unlock Level 3 in Story Mode to access this feature.</p>
+    content.innerHTML = `
+      <h2>⚔️ Adventure Mode</h2>
+      <button onclick="alert('Unlock Level 3 in Story Mode to access!')">Practice Mode</button>
+      <button onclick="alert('Unlock Level 3 in Story Mode to access!')">Time Mode</button>
     `;
   } else if (section === 'rank') {
-    main.innerHTML = `
-      <h2>🏆 Ranking</h2>
-      <p>Your current rank and progress will appear here (graph/stats coming soon).</p>
+    content.innerHTML = `
+      <h2>🏆 Rank & Stats</h2>
+      <p>Your current rank: Bronze</p>
+      <p>Points: 1200</p>
+      <div style='height: 200px; background: rgba(255,255,255,0.2); margin-top: 10px;'>[Graph Placeholder]</div>
     `;
   } else if (section === 'settings') {
-    main.innerHTML = `
+    content.innerHTML = `
       <h2>⚙️ Settings</h2>
-      <p>Language: <select><option>English</option><option>Pilipino</option></select></p>
-      <p>Music Volume: <input type='range' min='0' max='100'></p>
+      <label>Music Volume:</label><input type="range" min="0" max="100"><br><br>
+      <label>Language:</label>
+      <select>
+        <option>English</option>
+        <option>Filipino</option>
+      </select>
     `;
   } else if (section === 'profile') {
-    main.innerHTML = `
+    content.innerHTML = `
       <h2>👤 Profile</h2>
-      <p>Name: ${currentUser.fullName}</p>
-      <p>Email: ${currentUser.email}</p>
-      <p>Username: ${currentUser.username}</p>
-      <img src="${currentUser.avatar}" style="width:100px;height:100px;border-radius:50%;">
+      <p>Full Name: ${localStorage.getItem("fullName")}</p>
+      <p>Email: ${localStorage.getItem("email")}</p>
+      <p>Username: ${localStorage.getItem("username")}</p>
+      <img src="${localStorage.getItem("avatar")}" style="width:100px;border-radius:50%;">
     `;
   }
 }
+
 
     main.innerHTML = `<h2>Profile</h2><p>Name: ${stored?.name || "Unknown"}</p><p>Email: ${stored?.email || "Unknown"}</p>`;
   }
