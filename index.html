@@ -1,3 +1,4 @@
+/* === index.html === */
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,37 +7,26 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
   <div class="container">
     <h1>Welcome to Preventix</h1>
-    <p>Let's prevent and fix!</p>
-
-    <!-- Button -->
-    <button onclick="sayHello()">About us</button>
-
-    <!-- Login Form -->
-    <div class="form-box">
+    <div class="form-box" id="login-box">
       <h2>Login</h2>
-      <input type="text" placeholder="Enter your name">
-      <input type="password" placeholder="Enter password">
-      <button class="form-btn">Login</button>
+      <input type="text" id="login-name" placeholder="Enter your name">
+      <input type="password" id="login-password" placeholder="Enter password">
+      <button onclick="loginUser()" class="form-btn">Login</button>
     </div>
-
-    <!-- Sign Up Form -->
-    <div class="form-box">
+    <div class="form-box" id="signup-box">
       <h2>Sign Up</h2>
-      <input type="text" placeholder="Full name">
-      <input type="email" placeholder="Email address">
-      <input type="password" placeholder="Create password">
-      <button class="form-btn">Sign Up</button>
+      <input type="text" id="signup-name" placeholder="Full name">
+      <input type="email" id="signup-email" placeholder="Email address">
+      <input type="password" id="signup-password" placeholder="Create password">
+      <button onclick="signupUser()" class="form-btn">Sign Up</button>
+    </div>
+    <div class="form-box" id="about-box">
+      <h3>About Preventix</h3>
+      <p>This platform helps users learn computer servicing through gamified interfaces. Developed by Noel.</p>
     </div>
   </div>
-
-  <script>
-    function sayHello() {
-      alert("Experiment ni noel HAHA.");
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
