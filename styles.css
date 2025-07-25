@@ -1,88 +1,147 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url("background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  font-family: Arial, sans-serif;
-  color: white;
-  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #1d1f20, #2a2d30);
+  color: #fff;
+  overflow-x: hidden;
 }
 
+/* Container */
 .container {
-  background-color: rgba(0, 0, 0, 0.6);
-  max-width: 600px;
+  max-width: 400px;
   margin: 50px auto;
   padding: 30px;
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 20px;
-  animation: fadeIn 1.2s ease-in;
+  text-align: center;
+  animation: slideFade 0.7s ease;
 }
 
-button {
-  background-color: #00bcd4;
-  color: white;
-  padding: 12px 24px;
-  font-size: 18px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s;
-  margin: 5px 0;
+.hidden {
+  display: none;
 }
 
-button:hover {
-  background-color: #0097a7;
-  transform: scale(1.05);
-}
-
-input {
+/* Form Elements */
+input, select {
   display: block;
-  width: 80%;
+  width: 90%;
   margin: 10px auto;
   padding: 10px;
   font-size: 16px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
 }
 
-input::placeholder {
-  color: #aaa;
+input[type="file"] {
+  background: #fff;
+  color: #000;
 }
 
 .form-box {
-  background-color: rgba(255, 255, 255, 0.1);
-  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 15px;
-  animation: slideUp 0.8s ease-out;
+  margin-top: 20px;
 }
 
+.form-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.form-btn:hover {
+  background-color: #388E3C;
+}
+
+button {
+  background-color: #2196F3;
+  color: white;
+  padding: 10px 18px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Dashboard */
 .dashboard {
   display: flex;
   height: 100vh;
+  animation: slideFade 0.7s ease;
 }
 
 .sidebar {
-  width: 220px;
-  background-color: rgba(0,0,0,0.8);
+  width: 240px;
+  background-color: #1a1a1a;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 30px;
+}
+
+.sidebar button {
+  width: 100%;
+  margin: 10px 0;
+  background-color: #333;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.sidebar button:hover {
+  background-color: #555;
+}
+
+.user-info img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.user-info h3 {
+  margin: 5px 0;
 }
 
 .main {
-  flex: 1;
-  background-color: rgba(255,255,255,0.1);
+  flex-grow: 1;
   padding: 40px;
-  overflow-y: auto;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Animations */
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from {opacity: 0;} to {opacity: 1;}
-}
-
-@keyframes slideUp {
-  from {transform: translateY(40px); opacity: 0;} to {transform: translateY(0); opacity: 1;}
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
