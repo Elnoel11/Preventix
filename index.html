@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Preventix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  
   <div class="container" id="loginContainer">
     <h1>Welcome to Preventix</h1>
     <p>Let's prevent and fix!</p>
@@ -20,7 +22,6 @@
     <button onclick="showRegistrationForm()">Sign Up</button>
   </div>
 
-  <!-- Registration Pop-up -->
   <div class="container hidden" id="registrationContainer">
     <div class="form-box">
       <h2>Register</h2>
@@ -39,6 +40,40 @@
     </div>
   </div>
 
+  <div class="container hidden" id="avatarContainer">
+    <div class="form-box">
+      <h2>Create Your Avatar</h2>
+      <input type="text" id="username" placeholder="Choose a username">
+      <input type="file" id="avatarUpload">
+      <button class="form-btn" onclick="saveAvatar()">Continue</button>
+    </div>
+  </div>
+
+  <div class="dashboard hidden" id="dashboard">
+    <div class="sidebar">
+      <div class="user-info">
+        <img id="avatarImage" src="" alt="Avatar">
+        <h3 id="userDisplayName"></h3>
+        <p id="userLevel">Level 1</p>
+      </div>
+      <button onclick="showSection('story')">📘 Story Mode</button>
+      <button onclick="showSection('adventure')">⚔️ Adventure</button>
+      <button onclick="showSection('rank')">🏆 Rank</button>
+      <button onclick="showSection('settings')">⚙️ Settings</button>
+      <button onclick="showSection('profile')">👤 Profile</button>
+    </div>
+    <div class="main" id="mainContent">
+      <h2>Welcome to Preventix Dashboard!</h2>
+      <p>Select a section from the left menu to begin.</p>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
+
