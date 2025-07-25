@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url("background.jpg"); /* make sure this file exists */
+  background-image: url("background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -16,6 +16,7 @@ body {
   margin: 50px auto;
   padding: 30px;
   border-radius: 20px;
+  animation: fadeIn 1.2s ease-in;
 }
 
 button {
@@ -26,20 +27,13 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 10px;
+  transition: all 0.3s;
+  margin: 5px 0;
 }
 
 button:hover {
   background-color: #0097a7;
-}
-
-/* Input form box */
-.form-box {
-  background-color: rgba(255, 255, 255, 0.1);
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 15px;
+  transform: scale(1.05);
 }
 
 input {
@@ -56,12 +50,39 @@ input::placeholder {
   color: #aaa;
 }
 
-.form-btn {
-  background-color: #4CAF50;
-  padding: 10px 20px;
-  font-size: 16px;
+.form-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+  animation: slideUp 0.8s ease-out;
 }
 
-.form-btn:hover {
-  background-color: #388E3C;
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.main {
+  flex: 1;
+  background-color: rgba(255,255,255,0.1);
+  padding: 40px;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;} to {opacity: 1;}
+}
+
+@keyframes slideUp {
+  from {transform: translateY(40px); opacity: 0;} to {transform: translateY(0); opacity: 1;}
 }
