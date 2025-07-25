@@ -1,66 +1,58 @@
-// Show/Hide Registration Form
-function toggleRegistration(show) {
-  document.getElementById("registrationForm").classList.toggle("hidden", !show);
+let registeredUser = {};
+
+function showRegistrationForm() {
+  document.getElementById("registrationForm").classList.remove("hidden");
 }
 
-// Dummy register function
-function registerUser() {
-  const name = document.getElementById("regName").value;
-  const password = document.getElementById("regPassword").value;
+function submitRegistration() {
+  registeredUser = {
+    fullName: document.getElementById("fullName").value,
+    password: document.getElementById("password").value,
+    username: "",
+    avatar: ""
+  };
+  document.getElementById("registrationForm").classList.add("hidden");
+  document.getElementById("avatarSetup").classList.remove("hidden");
+}
 
-  if (!name || !password) {
-    alert("Please fill in name and password.");
-    return;
+function completeAvatar() {
+  registeredUser.username = document.getElementById("username").value;
+  const fileInput = document.getElementById("avatarUpload");
+  if (fileInput.files.length > 0) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      registeredUser.avatar = e.target.result;
+      document.getElementById("avatarSetup").classList.add("hidden");
+      showDashboard();
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+  } else {
+    alert("Please upload a photo.");
   }
-
-  localStorage.setItem("preventixUser", JSON.stringify({ name, password }));
-  alert("Account created! Please login.");
-  toggleRegistration(false);
 }
 
-// Dummy login function
 function loginUser() {
-  const name = document.getElementById("loginName").value;
-  const password = document.getElementById("loginPassword").value;
-  const savedUser = JSON.parse(localStorage.getItem("preventixUser"));
-
-  if (!savedUser || name !== savedUser.name || password !== savedUser.password) {
-    alert("Invalid login!");
-    return;
+  const loginName = document.getElementById("loginName").value;
+  const loginPass = document.getElementById("loginPassword").value;
+  if (loginName === registeredUser.fullName && loginPass === registeredUser.password) {
+    showDashboard();
+  } else {
+    alert("Invalid login credentials.");
   }
+}
 
+function showDashboard() {
   document.getElementById("loginContainer").classList.add("hidden");
   document.getElementById("dashboard").classList.remove("hidden");
-  document.getElementById("userName").textContent = savedUser.name;
+  document.getElementById("avatarImage").src = registeredUser.avatar;
+  document.getElementById("displayName").textContent = registeredUser.username;
 }
 
-// Show section
-function showSection(section) {
-  const main = document.getElementById("mainContent");
-  main.innerHTML = "";
-
-  if (section === "story") {
-    main.innerHTML = "<h2>📘 Story Mode</h2><p>Content coming soon...</p>";
-  } else if (section === "adventure") {
-    main.innerHTML = "<h2>⚔️ Adventure</h2><p>You need to unlock Level 3 in Story Mode.</p>";
-  } else if (section === "rank") {
-    main.innerHTML = "<h2>🏆 Ranking</h2><p>Your position and achievements will show here.</p>";
-  } else if (section === "settings") {
-    main.innerHTML = `<h2>⚙️ Settings</h2>
-      <label>Music Volume: <input type="range" min="0" max="100"></label><br>
-      <label>Language:
-        <select>
-          <option>English</option>
-          <option>Filipino</option>
-        </select>
-      </label>`;
-  } else if (section === "profile") {
-    const user = JSON.parse(localStorage.getItem("preventixUser"));
-    main.innerHTML = `<h2>👤 Profile</h2>
-      <p>Full Name: ${user.name}</p>
-      <p>Email: ${user.email || 'Not provided'}</p>`;
-  }
+function showSection(sectionName) {
+  const content = document.getElementById("mainContent");
+  content.innerHTML = `<h2>${sectionName.charAt(0).toUpperCase() + sectionName.slice(1)} Section</h2><p>Content for ${sectionName}</p>`;
 }
+
 
 
 
