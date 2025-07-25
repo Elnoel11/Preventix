@@ -1,13 +1,14 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #1d1f20, #2a2d30);
-  color: #fff;
-  overflow-x: hidden;
+  background-image: url("background.jpg"); /* Make sure the image exists in your repo */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
+  color: white;
 }
 
-/* Container */
 .container {
   max-width: 400px;
   margin: 50px auto;
@@ -22,7 +23,6 @@ body {
   display: none;
 }
 
-/* Form Elements */
 input, select {
   display: block;
   width: 90%;
@@ -123,7 +123,6 @@ button:hover {
   animation: fadeIn 0.4s ease;
 }
 
-/* Animations */
 @keyframes slideFade {
   from {
     opacity: 0;
