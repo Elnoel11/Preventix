@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Preventix Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    // Para hindi ma-access ng hindi naka-login
+    if (localStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "index.html";
+    }
+  </script>
+
+  <div class="dashboard">
+    <div class="sidebar">
+      <div class="user-info">
+        <img src="" alt="Avatar">
+        <h3 id="userName"></h3>
+        <p>Level 1</p>
+      </div>
+      <button onclick="navigate('story')">📘 Story Mode</button>
+      <button onclick="navigate('adventure')">⚔️ Adventure</button>
+      <button onclick="navigate('rank')">🏆 Rank</button>
+      <button onclick="navigate('settings')">⚙️ Settings</button>
+      <button onclick="navigate('profile')">👤 Profile</button>
+    </div>
+    <div class="main-content" id="mainContent">
+      <h2>Welcome to Preventix Dashboard</h2>
+      <p>Select a section to begin.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("userName").innerText = localStorage.getItem("loggedInName");
+
+    function navigate(section) {
+      document.getElementById("mainContent").innerHTML = `<h2>${section.toUpperCase()}</h2><p>Section content here.</p>`;
+    }
+  </script>
+</body>
+</html>
