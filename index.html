@@ -6,9 +6,11 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Login Section -->
+
+  <!-- Login Container -->
   <div class="container" id="loginContainer">
     <h1>Welcome to Preventix</h1>
+    <p>Let’s prevent and fix!</p>
     <div class="form-box">
       <h2>Login</h2>
       <input type="text" id="loginName" placeholder="Enter your full name">
@@ -18,33 +20,23 @@
     <button onclick="toggleRegistration(true)">Sign Up</button>
   </div>
 
-  <!-- Registration Form (Popup) -->
-  <div class="popup hidden" id="registrationContainer">
+  <!-- Registration Popup -->
+  <div class="popup hidden" id="registrationForm">
     <div class="form-box">
-      <h2>Register</h2>
-      <input type="text" id="fullName" placeholder="Full Name">
-      <input type="date" id="birthDate">
-      <select id="gender">
+      <h2>Sign Up</h2>
+      <input type="text" id="regName" placeholder="Full Name">
+      <input type="date" id="regBirth">
+      <select id="regGender">
         <option value="">Select Gender</option>
-        <option>Male</option>
-        <option>Female</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
       </select>
-      <input type="text" id="gradeLevel" placeholder="Grade Level">
-      <input type="text" id="section" placeholder="Section">
-      <input type="email" id="email" placeholder="Email">
-      <input type="password" id="password" placeholder="Password">
-      <button onclick="registerUser()">Submit</button>
+      <input type="text" id="regGrade" placeholder="Grade Level">
+      <input type="text" id="regSection" placeholder="Section">
+      <input type="email" id="regEmail" placeholder="Email">
+      <input type="password" id="regPassword" placeholder="Password">
+      <button onclick="registerUser()">Register</button>
       <button onclick="toggleRegistration(false)">Cancel</button>
-    </div>
-  </div>
-
-  <!-- Avatar Setup -->
-  <div class="popup hidden" id="avatarContainer">
-    <div class="form-box">
-      <h2>Create Avatar</h2>
-      <input type="text" id="username" placeholder="Username">
-      <input type="file" id="avatarUpload">
-      <button onclick="saveAvatar()">Continue</button>
     </div>
   </div>
 
@@ -52,9 +44,9 @@
   <div class="dashboard hidden" id="dashboard">
     <div class="sidebar">
       <div class="user-info">
-        <img id="avatarImage" src="" alt="Avatar">
-        <h3 id="userDisplayName"></h3>
-        <p id="userLevel">Level 1</p>
+        <img id="userAvatar" src="" alt="Avatar">
+        <h3 id="userName">Username</h3>
+        <p>Level 1</p>
       </div>
       <button onclick="showSection('story')">📘 Story Mode</button>
       <button onclick="showSection('adventure')">⚔️ Adventure</button>
@@ -63,9 +55,14 @@
       <button onclick="showSection('profile')">👤 Profile</button>
     </div>
     <div class="main" id="mainContent">
-      <h2>Select a section</h2>
+      <h2>Welcome to the Dashboard</h2>
+      <p>Select a section from the left menu.</p>
     </div>
   </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
   <script src="script.js"></script>
 </body>
