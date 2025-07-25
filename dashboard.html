@@ -7,7 +7,7 @@
 </head>
 <body>
   <script>
-    // Para hindi ma-access ng hindi naka-login
+    // Redirect if not logged in
     if (localStorage.getItem("loggedIn") !== "true") {
       window.location.href = "index.html";
     }
@@ -16,9 +16,9 @@
   <div class="dashboard">
     <div class="sidebar">
       <div class="user-info">
-        <img src="" alt="Avatar">
+        <img id="avatarImage" src="" alt="Avatar">
         <h3 id="userName"></h3>
-        <p>Level 1</p>
+        <p id="userLevel">Level 1</p>
       </div>
       <button onclick="navigate('story')">📘 Story Mode</button>
       <button onclick="navigate('adventure')">⚔️ Adventure</button>
@@ -26,6 +26,7 @@
       <button onclick="navigate('settings')">⚙️ Settings</button>
       <button onclick="navigate('profile')">👤 Profile</button>
     </div>
+
     <div class="main-content" id="mainContent">
       <h2>Welcome to Preventix Dashboard</h2>
       <p>Select a section to begin.</p>
@@ -33,10 +34,41 @@
   </div>
 
   <script>
-    document.getElementById("userName").innerText = localStorage.getItem("loggedInName");
+    // Load avatar and username
+    const avatar = JSON.parse(localStorage.getItem('preventixAvatar'));
+    const user = JSON.parse(localStorage.getItem('preventixUser'));
+
+    if (avatar && user) {
+      document.getElementById('userName').innerText = avatar.username;
+      document.getElementById('avatarImage').src = avatar.avatarUrl;
+    }
 
     function navigate(section) {
-      document.getElementById("mainContent").innerHTML = `<h2>${section.toUpperCase()}</h2><p>Section content here.</p>`;
+      const content = document.getElementById("mainContent");
+      if (section === "story") {
+        content.innerHTML = "<h2>📘 Story Mode</h2><p>Coming soon!</p>";
+      } else if (section === "adventure") {
+        content.innerHTML = "<h2>⚔️ Adventure</h2><p>Unlock Story Mode first!</p>";
+      } else if (section === "rank") {
+        content.innerHTML = "<h2>🏆 Rank</h2><p>Progress and stats will show here.</p>";
+      } else if (section === "settings") {
+        content.innerHTML = `
+          <h2>⚙️ Settings</h2>
+          <label>Music Volume</label><br><input type="range"><br>
+          <label>Language</label><br>
+          <select><option>English</option><option>Filipino</option></select>
+        `;
+      } else if (section === "profile") {
+        content.innerHTML = `
+          <h2>👤 Profile</h2>
+          <img src="${avatar.avatarUrl}" style="width:100px;border-radius:50%"><br>
+          <p><strong>Full Name:</strong> ${user.fullName}</p>
+          <p><strong>Email:</strong> ${user.email}</p>
+          <p><strong>Username:</strong> ${avatar.username}</p>
+          <p><strong>Gender:</strong> ${user.gender}</p>
+          <p><strong>Grade & Section:</strong> ${user.gradeLevel} - ${user.section}</p>
+        `;
+      }
     }
   </script>
 </body>
