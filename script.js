@@ -59,46 +59,50 @@ function saveAvatar() {
 
     localStorage.setItem('preventixAvatar', JSON.stringify(avatarData));
     avatarContainer.classList.add('hidden');
-    showDashboard();
+    window.location.href = "dashboard.html";
   };
   reader.readAsDataURL(avatarFile);
 }
 
-// Login user
+// Corrected Login user logic
 function loginUser() {
-  const inputName = document.getElementById('loginName').value;
-  const inputPass = document.getElementById('loginPassword').value;
-  const storedName = localStorage.getItem("fullName");
-  const storedPass = localStorage.getItem("password");
+  const inputName = loginName.value;
+  const inputPass = loginPassword.value;
+
+  const storedUser = JSON.parse(localStorage.getItem("preventixUser"));
+  if (!storedUser) {
+    alert("No user registered yet.");
+    return;
+  }
+
+  const storedName = storedUser.fullName;
+  const storedPass = storedUser.password;
 
   if (inputName === storedName && inputPass === storedPass) {
-    // Set session
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem("loggedInName", storedName);
-    
-    // Redirect to dashboard
     window.location.href = "dashboard.html";
   } else {
     alert("Incorrect credentials.");
   }
 }
 
-// Show dashboard and user info
+// Dashboard logic (only works if called in dashboard.html)
 function showDashboard() {
   const storedUser = JSON.parse(localStorage.getItem('preventixUser'));
   const storedAvatar = JSON.parse(localStorage.getItem('preventixAvatar'));
 
   if (!storedUser || !storedAvatar) return;
 
-  document.getElementById('userDisplayName').textContent = storedAvatar.username;
-  document.getElementById('avatarImage').src = storedAvatar.avatarUrl;
-  document.getElementById('userLevel').textContent = 'Level 1';
-
-  dashboard.classList.remove('hidden');
+  document.getElementById('userName').textContent = storedAvatar.username;
+  document.querySelector('.user-info img').src = storedAvatar.avatarUrl;
 }
 
-// Show dashboard sections
-function showSection(section) {
+// Section switching in dashboard
+function navigate(section) {
+  const storedUser = JSON.parse(localStorage.getItem('preventixUser'));
+  const storedAvatar = JSON.parse(localStorage.getItem('preventixAvatar'));
+
   switch (section) {
     case 'story':
       mainContent.innerHTML = `
@@ -137,9 +141,6 @@ function showSection(section) {
       `;
       break;
     case 'profile':
-      const storedUser = JSON.parse(localStorage.getItem('preventixUser'));
-      const storedAvatar = JSON.parse(localStorage.getItem('preventixAvatar'));
-
       mainContent.innerHTML = `
         <h2>👤 Profile</h2>
         <img src="${storedAvatar.avatarUrl}" alt="Avatar" style="width:100px;border-radius:50%;">
