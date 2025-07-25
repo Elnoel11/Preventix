@@ -6,8 +6,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <!-- Login Container -->
+  <!-- Login Page -->
   <div class="container" id="loginContainer">
     <h1>Welcome to Preventix</h1>
     <p>Let’s prevent and fix!</p>
@@ -15,28 +14,37 @@
       <h2>Login</h2>
       <input type="text" id="loginName" placeholder="Enter your full name">
       <input type="password" id="loginPassword" placeholder="Enter password">
-      <button onclick="loginUser()">Login</button>
+      <button class="form-btn" onclick="loginUser()">Login</button>
     </div>
-    <button onclick="toggleRegistration(true)">Sign Up</button>
+    <button class="form-btn" onclick="showRegistrationForm()">Sign Up</button>
   </div>
 
-  <!-- Registration Popup -->
+  <!-- Registration Form -->
   <div class="popup hidden" id="registrationForm">
     <div class="form-box">
-      <h2>Sign Up</h2>
-      <input type="text" id="regName" placeholder="Full Name">
-      <input type="date" id="regBirth">
-      <select id="regGender">
-        <option value="">Select Gender</option>
+      <h2>Register</h2>
+      <input type="text" id="fullName" placeholder="Full Name">
+      <input type="date" id="birthDate">
+      <select id="gender">
+        <option value="">Gender</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
       </select>
-      <input type="text" id="regGrade" placeholder="Grade Level">
-      <input type="text" id="regSection" placeholder="Section">
-      <input type="email" id="regEmail" placeholder="Email">
-      <input type="password" id="regPassword" placeholder="Password">
-      <button onclick="registerUser()">Register</button>
-      <button onclick="toggleRegistration(false)">Cancel</button>
+      <input type="text" id="gradeLevel" placeholder="Grade Level">
+      <input type="text" id="section" placeholder="Section">
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Password">
+      <button class="form-btn" onclick="submitRegistration()">Submit</button>
+    </div>
+  </div>
+
+  <!-- Avatar Setup -->
+  <div class="popup hidden" id="avatarSetup">
+    <div class="form-box">
+      <h2>Create Avatar</h2>
+      <input type="text" id="username" placeholder="Username">
+      <input type="file" id="avatarUpload">
+      <button class="form-btn" onclick="completeAvatar()">Continue</button>
     </div>
   </div>
 
@@ -44,8 +52,8 @@
   <div class="dashboard hidden" id="dashboard">
     <div class="sidebar">
       <div class="user-info">
-        <img id="userAvatar" src="" alt="Avatar">
-        <h3 id="userName">Username</h3>
+        <img id="avatarImage" src="" alt="Avatar">
+        <h3 id="displayName"></h3>
         <p>Level 1</p>
       </div>
       <button onclick="showSection('story')">📘 Story Mode</button>
@@ -55,8 +63,8 @@
       <button onclick="showSection('profile')">👤 Profile</button>
     </div>
     <div class="main" id="mainContent">
-      <h2>Welcome to the Dashboard</h2>
-      <p>Select a section from the left menu.</p>
+      <h2>Welcome to your Dashboard</h2>
+      <p>Select an option from the left menu.</p>
     </div>
   </div>
 
@@ -64,7 +72,6 @@
 </body>
 </html>
 
-  <script src="script.js"></script>
 </body>
 </html>
 
